@@ -266,11 +266,11 @@ To send Kaia's native token from one account to another, specify the recipient's
 **Example:**
 
 ```bash
-cast send --rpc-url https://rpc.kaia.network --private-key YOUR_PRIVATE_KEY --to 0xRecipientAddress --value 1000000000000000000  # 1 Kaia token in the smallest unit (wei)
+cast send --rpc-url https://rpc.kaia.network --account YOUR_PRIVATE_KEY --to 0xRecipientAddress --value 1000000000000000000  # 1 Kaia token in the smallest unit (wei)
 ```
 
 - `--rpc-url`: The URL of the Kaia RPC endpoint (`https://rpc.kaia.network`).
-- `--private-key`: The private key used to sign the transaction.
+- `--account`: The private key used to sign the transaction.
 - `--to`: The recipient’s address.
 - `--value`: The amount of Kaia tokens to send (in smallest unit, similar to wei in Ethereum, where 1 Kaia = 10^18 smallest units).
 
@@ -435,7 +435,7 @@ cast wallet sign --private-key 0xYourPrivateKey \
 ```
 
 Explanation
-- `--private-key`: Your private key is used to sign the transaction.
+- `--account`: Your private key is used to sign the transaction.
 - `--to`: The recipient's address.
 - `--value`: The amount of Ether to send, in wei.
 - `--gas`: Estimated gas required, e.g., 21000 for a basic transfer.
@@ -1320,8 +1320,8 @@ Example Output:
 
 #### Benefits on Kaia Blockchain:
 1. `Debugging Contract Interactions`: Decode data returned from contract calls to verify outputs.
-2. Analyzing Transaction Receipts`: Decode the data in transaction receipts or events for debugging and validation.
-3. Interpreting Logs and Events`: Decode complex log data to understand emitted events, which is valuable for contract audits.
+2. `Analyzing Transaction Receipts`: Decode the data in transaction receipts or events for debugging and validation.
+3. `Interpreting Logs and Events`: Decode complex log data to understand emitted events, which is valuable for contract audits.
 
 The cast abi-decode command is a vital tool for Kaia developers needing to interpret ABI-encoded data, aiding in debugging, analysis, and auditing of smart contract interactions and outputs.
 
@@ -1655,21 +1655,21 @@ This will create a new wallet for Kaia, giving you a private key and the corresp
 2. Import an Existing Kaia Wallet Using a Private Key
 To import an existing Kaia wallet, use the following command, substituting 0xYourPrivateKey with the private key of your Kaia wallet:
 ```bash
-cast wallet import --private-key 0xYourKaiaPrivateKey --network kaia
+cast wallet import --account 0xYourKaiaPrivateKey --network kaia
 ```
 This will import the Kaia wallet and display the address.
 
 3. Sign a Transaction on Kaia
 To sign a transaction on Kaia, such as sending native Kaia tokens (or other tokens supported on Kaia), use:
 ```bash
-cast wallet sign --private-key 0xYourPrivateKey --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
+cast wallet sign --account 0xYourPrivateKey --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
 ```
 This signs a transaction to send 1 Kaia token (or the equivalent in native units, depending on the token's decimal) from your wallet to the recipient's address.
 
 4. Sign a Message on Kaia
 To sign a message (useful for authentication or identity verification), use:
 ```bash
-cast wallet sign-message --private-key 0xYourPrivateKey "Hello, Kaia Blockchain!" --network kaia
+cast wallet sign-message --account 0xYourPrivateKey "Hello, Kaia Blockchain!" --network kaia
 ```
 This signs the message "Hello, Kaia Blockchain!" using the private key of your Kaia wallet.
 
@@ -1683,7 +1683,7 @@ This will return the balance of the Kaia wallet at the specified address.
 6. Send Kaia Tokens Using the Wallet
 To send tokens (native Kaia tokens or other Kaia-based tokens) from your wallet to another address:
 ```bash
-cast wallet send --private-key 0xYourPrivateKey --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
+cast wallet send --account 0xYourPrivateKey --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
 ```
 This command sends 1 Kaia token (1,000,000,000,000,000,000 wei equivalent) from your wallet to the recipient's Kaia address.
 
@@ -1732,16 +1732,16 @@ blockchain in a secure and efficient manner.
 The cast wallet address command is used to retrieve the public address associated with a wallet, typically from a private key or a local wallet file. On Kaia blockchain, this command would provide the address for your Kaia wallet, which you can use to interact with the Kaia network (e.g., sending and receiving tokens, interacting with smart contracts).
 Command Syntax:
 ```bash
-cast wallet address --private-key <your-private-key> --network kaia
+cast wallet address --account <your-private-key> --network kaia
 ```
 
 #### Description:
---private-key <your-private-key>: This flag specifies the private key for the wallet. The command uses the private key to generate the corresponding public address.
---network kaia: This flag specifies that the wallet is for the Kaia blockchain, ensuring that the address is compatible with the Kaia network.
+--`account` <your-private-key>: This flag specifies the private key for the wallet. The command uses the private key to generate the corresponding public address.
+--`network kaia`: This flag specifies that the wallet is for the Kaia blockchain, ensuring that the address is compatible with the Kaia network.
 
 Example Usage:
 ```bash
-cast wallet address --private-key 0x7a14bfcd4b6e5e9f6d46212e56c02bdbf9b3c7f7c4d10d7ef9d289f7deecfc01 --network kaia
+cast wallet address --account 0x7a14bfcd4b6e5e9f6d46212e56c02bdbf9b3c7f7c4d10d7ef9d289f7deecfc01 --network kaia
 ```
 
 Example Output:
@@ -1767,18 +1767,18 @@ The cast wallet sign command in Foundry is used to sign a transaction locally us
 On  Kaia blockchain, this command would allow you to sign a transaction (e.g., sending tokens or interacting with smart contracts) before submitting it to the Kaia network.
 Command Syntax:
 ```bash
-cast wallet sign --private-key <your-private-key> --to <recipient-address> --value <amount> --gas <gas-limit> --gas-price <gas-price>
+cast wallet sign --account <your-private-key> --to <recipient-address> --value <amount> --gas <gas-limit> --gas-price <gas-price>
 ```
 
 #### Parameters:
---private-key <your-private-key>: The private key associated with your Kaia wallet. This is used to sign the transaction and generate a signature.
+--account <your-private-key>: The private key associated with your Kaia wallet. This is used to sign the transaction and generate a signature.
 --to <recipient-address>: The address you want to send the transaction to. This can be the address of another user or a smart contract.
 --value <amount>: The amount of tokens or assets (in Wei for Kaia) that you're transferring. For example, you might want to send 1 token, which would be specified as 1000000000000000000 if the token has 18 decimals.
 --gas <gas-limit>: The maximum amount of gas you're willing to spend on the transaction. For example, for a simple transaction, you might set this to 21000 gas.
 --gas-price <gas-price>: The price you're willing to pay per unit of gas. This is specified in the native unit (Wei for Kaia).
 Example Command:
 ```bash
-cast wallet sign --private-key 0x7a14bfcd4b6e5e9f6d46212e56c02bdbf9b3c7f7c4d10d7ef9d289f7deecfc01 \
+cast wallet sign --account 0x7a14bfcd4b6e5e9f6d46212e56c02bdbf9b3c7f7c4d10d7ef9d289f7deecfc01 \
 --to 0xRecipientAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000
 ```
 
