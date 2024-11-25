@@ -23,7 +23,7 @@ This article explores Foundry Cast, its functions, and, through practical exampl
 ## Prerequisites
 
 - Basic understanding of Kaia Blockchain, Ethereum, and smart contracts.
-- Ability to install Foundry and access Kaia’s RPC endpoints (e.g., `https://rpc.kaia.network`).
+- Ability to install Foundry and access Kaia’s RPC endpoints (e.g https://public-en.node.kaia.io).
 - Familiarity with executing terminal commands and handling terminal outputs.
 - Knowledge of Solidity and interacting with smart contracts.
 - Understanding ABI encoding/decoding for Kaia smart contract interactions.
@@ -106,7 +106,7 @@ Assuming you want to send a transaction on the Kaia blockchain using `cast send`
 The command for sending a transaction on Kaia might look like this:
 
 ```bash
-cast send --rpc-url https://kaia-node.example.com --gas-limit 21000 --to 0xRecipientAddress
+cast send --rpc-url https://public-en.node.kaia.io --gas-limit 21000 --to 0xRecipientAddress
 ```
 
 ## Chain Commands For Kaia Blockchain
@@ -128,7 +128,7 @@ The `cast chain-id` command in Foundry Cast retrieves the unique chain ID for th
    12345
    ```
 
-   This output (e.g., `12345`) indicates you’re connected to the Kaia Mainnet, where `12345` is the Kaia chain ID.
+   This output (e.g., `8217`) indicates you’re connected to the Kaia Mainnet, where `8217` is the Kaia chain ID.
 
 2. **Specify a Custom RPC URL**  
    If you are connected to a different Kaia network, like a testnet, specify the RPC URL with the `--rpc-url` option to ensure you're querying the correct network.
@@ -136,12 +136,12 @@ The `cast chain-id` command in Foundry Cast retrieves the unique chain ID for th
    **Example command for verifying the chain ID on Kaia Testnet:**
 
    ```bash
-   cast chain-id --rpc-url https://testnet.kaia.io/rpc
+   cast chain-id --rpc-url https://public-en-kairos.node.kaia.io)
    ```
 
    **Result (Kaia Testnet example):**  
    ```bash
-   67890
+   1001
    ```
 
    This indicates the chain ID for the Kaia Testnet.
@@ -201,7 +201,7 @@ Before running deployment scripts or other actions, verifying the network is a g
 EXPECTED_NETWORK="kaia-mainnet"
 
 # Check the actual network using cast chain
-ACTUAL_NETWORK=$(cast chain --rpc-url https://mainnet.kaia.io/rpc)
+ACTUAL_NETWORK=$(cast chain --rpc-url https://public-en.node.kaia.io)
 
 if [ "$ACTUAL_NETWORK" = "$EXPECTED_NETWORK" ]; then
     echo "Connected to $EXPECTED_NETWORK. Proceeding with deployment..."
@@ -210,8 +210,6 @@ else
     echo "Connected to $ACTUAL_NETWORK instead of $EXPECTED_NETWORK. Aborting deployment."
 fi
 ```
-
----
 
 ### 3. `cast client`
 The `cast client` command in Foundry Cast retrieves the client version of the blockchain node you're connected to, such as the software and version of the node (e.g., Geth, Besu). This is useful for ensuring that the node you're interacting with supports the required features or is running an expected version.
@@ -222,7 +220,7 @@ The `cast client` command in Foundry Cast retrieves the client version of the bl
    To see the client version of the Kaia node you're connected to, use the following command:
 
    ```bash
-   cast client --rpc-url https://rpc.kaia.network
+   cast client --rpc-url https://public-en.node.kaia.io
    ```
 
    **Expected Output:**  
@@ -237,7 +235,7 @@ You can retrieve the client version and ensure compatibility with specific featu
 
 ```bash
 # Retrieve client information
-CLIENT_INFO=$(cast client --rpc-url https://rpc.kaia.network)
+CLIENT_INFO=$(cast client --rpc-url https://public-en.node.kaia.io)
 
 # Display client info
 echo "Connected to client: $CLIENT_INFO"
@@ -250,8 +248,6 @@ else
     echo "Incompatible client version. Aborting operation."
 fi
 ```
-
----
 
 ## Transaction Commands
 
@@ -266,10 +262,10 @@ To send Kaia's native token from one account to another, specify the recipient's
 **Example:**
 
 ```bash
-cast send --rpc-url https://rpc.kaia.network --account YOUR_PRIVATE_KEY --to 0xRecipientAddress --value 1000000000000000000  # 1 Kaia token in the smallest unit (wei)
+cast send --rpc-url https://public-en.node.kaia.io --account YOUR_PRIVATE_KEY --to 0xRecipientAddress --value 1000000000000000000  # 1 Kaia token in the smallest unit (wei)
 ```
 
-- `--rpc-url`: The URL of the Kaia RPC endpoint (`https://rpc.kaia.network`).
+- `--rpc-url`: The URL of the Kaia RPC endpoint (`https://public-en.node.kaia.io`).
 - `--account`: The private key used to sign the transaction.
 - `--to`: The recipient’s address.
 - `--value`: The amount of Kaia tokens to send (in smallest unit, similar to wei in Ethereum, where 1 Kaia = 10^18 smallest units).
@@ -288,7 +284,7 @@ If you want to send an ERC-20 token on the Kaia network, you will interact with 
 **Example:**
 
 ```bash
-cast send --rpc-url https://rpc.kaia.network --private-key YOUR_PRIVATE_KEY --to 0xTokenContractAddress --data "0xa9059cbb000000000000000000000000RecipientAddress0000000000000000000000000000000000"
+cast send --rpc-url https://public-en.node.kaia.io --account YOUR_PRIVATE_KEY --to 0xTokenContractAddress --data "0xa9059cbb000000000000000000000000RecipientAddress0000000000000000000000000000000000"
 ```
 
 **Explanation of parameters:**  
@@ -314,12 +310,12 @@ Steps:
 
 Example Command:
 ```
-cast call --rpc-url https://rpc.kaia.network \
+cast call --rpc-url https://public-en.node.kaia.io \
 0xTokenContractAddress "balanceOf(address)(uint256)" 0xYourAddress
 ```
 
 Explanation of the Command:
-- `--rpc-url https://rpc.kaia.network`: Specifies the RPC URL for Kaia's network.
+- `--rpc-url https://public-en.node.kaia.io`: Specifies the RPC URL for Kaia's network.
 - `0xTokenContractAddress`: The address of the ERC-20 token contract on the Kaia network.
 - `"balanceOf(address)(uint256)"`: The ABI-encoded signature for the balanceOf function. It takes an address as input and returns the balance as a uint256.
 - `0xYourAddress`: The address for which you want to check the token balance.
@@ -352,12 +348,12 @@ Steps:
 
 Example Command:
 ```
-cast estimate --rpc-url https://rpc.kaia.network \
+cast estimate --rpc-url https://public-en.node.kaia.io \
 0xTokenContractAddress "transfer(address,uint256)" 0xRecipientAddress 1000000000000000000000
 ```
 
 Explanation of the Command:
-- `--rpc-url https://rpc.kaia.network`: The RPC URL for the Kaia network.
+- `--rpc-url https://public-en.node.kaia.io`: The RPC URL for the Kaia network.
 - `0xTokenContractAddress`: The address of the ERC-20 token contract on Kaia.
 - `"transfer(address,uint256)"`: The ABI-encoded signature of the transfer function, which takes an address and a uint256 value (the amount to transfer).
 - `0xRecipientAddress`: The recipient's address to which you want to send tokens.
@@ -386,7 +382,7 @@ Example Transaction Hash:
 Command to Retrieve Transaction Details:
 To fetch details of this transaction, use:
 ```
-cast tx 0x5c4d8b78a1ed506219234ad54bb4f0d19a6ac697c0c9b0154b417de85b4e47e --rpc-url https://rpc.kaia.network
+cast tx 0x5c4d8b78a1ed506219234ad54bb4f0d19a6ac697c0c9b0154b417de85b4e47e --rpc-url https://public-en.node.kaia.io
 ```
 
 Example Output:
@@ -427,7 +423,7 @@ Step-by-Step Guide:
 First, sign the transaction using cast wallet sign:
 
 ```
-cast wallet sign --private-key 0xYourPrivateKey \
+cast wallet sign --account 0xYourPrivateKey \
 --to 0xRecipientAddress \
 --value 1000000000000000000 \
 --gas 21000 \
@@ -447,7 +443,7 @@ This command will generate a signed transaction string.
 After signing, use cast publish to send the transaction to the Kaia network:
 
 ```
-cast publish --signed "0xf86c808504a817c800825208940xRecipientAddress880de0b6b3a7640000801ba0b90cfd712f746c011f7fffc9b74f5e35b7f9f8da3f92a6183a199ffea56f7d1da02c7a27f7fc50bc2e870f09d278b60e1788d345f8d4f949557f15db34c90bb76bfe76f" --rpc-url https://rpc.kaia.network
+cast publish --signed "0xf86c808504a817c800825208940xRecipientAddress880de0b6b3a7640000801ba0b90cfd712f746c011f7fffc9b74f5e35b7f9f8da3f92a6183a199ffea56f7d1da02c7a27f7fc50bc2e870f09d278b60e1788d345f8d4f949557f15db34c90bb76bfe76f" --rpc-url https://public-en.node.kaia.io
 ```
 
 - `--signed`: The signed transaction string created in the previous step.
@@ -481,7 +477,7 @@ Step-by-Step Guide:
 2. Use cast receipt to Retrieve Transaction Receipt:
    With the transaction hash in hand, run the following command:
    ```
-   cast receipt 0x5c4d8b78a1ed506219234ad54bb4f0d19a6ac697c0c9b0154b417de85b4e47e --rpc-url https://rpc.kaia.network
+   cast receipt 0x5c4d8b78a1ed506219234ad54bb4f0d19a6ac697c0c9b0154b417de85b4e47e --rpc-url https://public-en.node.kaia.io
    ```
 
    - `--rpc-url`: Specify Kaia's RPC endpoint to connect to the network.
@@ -658,7 +654,7 @@ Run the Command: Use cast find-block with the timestamp to get the nearest block
 
 ```
 bash
-cast find-block 1725148800 --rpc-url <kaia_rpc_url>
+cast find-block 1725148800 --rpc-url <https://public-en.node.kaia.io>
 ```
 
 2. Replace <kaia_rpc_url> with the RPC endpoint URL for Kaia.
@@ -688,7 +684,7 @@ In the context of the Kaia blockchain, using the cast gas-price command would al
 Let’s assume you're working on a project in Kaia and need to know the current gas price before interacting with a smart contract or sending a transaction. Here's how you would use the cast gas-price command:
 Example Command
 ```bash
-cast gas-price --rpc-url <kaia_rpc_url>
+cast gas-price --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 <kaia_rpc_url> is the RPC endpoint for the Kaia blockchain.
@@ -722,7 +718,7 @@ Using the cast block-numbercommand Kaia blockchain would allow developers to che
 Let’s say you're developing on Kaia and want to know the latest block number before querying for transaction data or interacting with a contract. Here's how to use the cast block-number command:
 Example Command
 ```bash
-cast block-number --rpc-url <kaia_rpc_url>
+cast block-number --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 <kaia_rpc_url> is the RPC endpoint for the Kaia blockchain.
@@ -756,7 +752,7 @@ On Kaia blockchain, if Kaia implements a similar fee structure, the cast basefee
 Let’s say you want to know the current base fee for the Kaia blockchain before sending a transaction. You can use the cast basefee command to retrieve this information.
 Example Command
 ```bash
-cast basefee --rpc-url <kaia_rpc_url>
+cast basefee --rpc-url <https://public-en.node.kaia.io>
 
 
 Where:
@@ -788,18 +784,18 @@ Querying a Block on Kaia Blockchain
 If you want to get the details of a specific block on the Kaia blockchain, you can use the cast block command with the block number or block hash. Here’s how you can do that.
 Example Command:
 ``` bash
-cast block 123456 --rpc-url <kaia_rpc_ur
+cast block 123456 --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 123456 is the block number you want to query.
 <kaia_rpc_url> is the RPC URL for the Kaia blockchain.
 Or, if you prefer using  block hash:
 bash
-cast block 0x5d4eb2f80e25835c8d5c3a87c80f18923f8be32b3950da76a7b4b4c6de45bcd8 --rpc-url <kaia_rpc_url>
+cast block 0x5d4eb2f80e25835c8d5c3a87c80f18923f8be32b3950da76a7b4b4c6de45bcd8 --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 0x5d4eb2f80e25835c8d5c3a87c80f18923f8be32b3950da76a7b4b4c6de45bcd8 is the block hash.
-<kaia_rpc_url> is the RPC URL for Kaia.
+<https://public-en.node.kaia.io> is the RPC URL for Kaia mainnet.
 ```
 Example Output:
 ```json
@@ -846,19 +842,19 @@ In the context of the Kaia blockchain, you can use cast age to check how long ag
 Let’s say you want to know the age of a block with the block number 123456. You would run the following command:
 Example Command:
 ```bash
-cast age 123456 --rpc-url <kaia
+cast age 123456 --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 123456 is the block number you want to check.
-<kaia_rpc_url> is the RPC URL for Kaia.
+<https://public-en.node.kaia.io> is the RPC URL for Kaia mainnet.
 Or if you want to check the age of a block using its hash:
 
 bash
-cast age 0x5d4eb2f80e25835c8d5c3a87c80f18923f8be32b3950da76a7b4b4c6de45bcd8 --rpc-url <kaia_rpc_url>
+cast age 0x5d4eb2f80e25835c8d5c3a87c80f18923f8be32b3950da76a7b4b4c6de45bcd8 --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 0x5d4eb2f80e25835c8d5c3a87c80f18923f8be32b3950da76a7b4b4c6de45bcd8 is the block hash.
-<kaia_rpc_url> is the RPC URL for Kaia.
+<https://public-en.node.kaia.io> is the RPC URL for Kaia mainnet.
 ```
 
 Example Output:
@@ -893,7 +889,7 @@ Let’s assume you want to check the balance of a Kaia address, say 0xYourAddres
 Example Command:
 ```bash
 
-cast balance 0xYourAddress --rpc-url <kaia_rpc_url>
+cast balance 0xYourAddress --rpc-url <https://public-en.node.kaia.io>
 
 Where:
 0xYourAddress is the Ethereum-style address you want to query (on Kaia blockchain).
@@ -936,7 +932,7 @@ Let’s assume you have a smart contract deployed on Kaia, and you want to query
 Example Command:
 ```bash
 Copy code
-cast storage --rpc-url <kaia_rpc_url> --contract 0xContractAddress --slot 0xSt
+cast storage --rpc-url <https://public-en.node.kaia.io> --contract 0xContractAddress --slot 0xSt
 
 Where:
 0xContractAddress is the Ethereum address of the deployed smart contract on Kaia.
@@ -973,7 +969,7 @@ Let’s assume you want to check the nonce of an address on Kaia to know how man
 Run the Command: You can use the cast nonce command to fetch the nonce for the specified address.
 Example Command:
 ```bash
-cast nonce --rpc-url <kaia_rpc_url> 0xYourAddress
+cast nonce --rpc-url <https://public-en.node.kaia.io> 0xYourAddress
 
 Where:
 0xYourAddress is the  Kaia address whose nonce you want to check.
@@ -1008,7 +1004,7 @@ Let’s say you want to fetch the bytecode of a deployed smart contract on the K
 2. `Run the Command`: Use the cast code command to fetch the bytecode for that address.
 Example Command:
 ```bash
-cast code --rpc-url <kaia_rpc_url> 0xContractAddress
+cast code --rpc-url <https://public-en.node.kaia.io> 0xContractAddress
 
 Where:
 0xContractAddress is the Kaia address of the deployed contract.
@@ -1042,7 +1038,7 @@ Let’s say you want to retrieve the size of a deployed smart contract on the Ka
 2. Run the Command: Use the cast codesize command to get the bytecode size for that contract address.
 Example Command:
 ```bash
-cast codesize --rpc-url <kaia_rpc_url> 0xContractAddress
+cast codesize --rpc-url <https://public-en.node.kaia.io> 0xContractAddress
 
 Where:
 0xContractAddress is the address of the deployed smart contract.
@@ -1081,7 +1077,7 @@ Let’s say you’re working on the Kaia blockchain and you want to find out if 
 2. Run the Command: Use cast lookup-address with the target address to search for any associated names.
 Example Command:
 ```bash
-cast lookup-address --rpc-url <kaia_rpc_url> 0xAddress
+cast lookup-address --rpc-url <https://public-en.node.kaia.io> 0xAddress
 
 Where:
 0xAddress is the Ethereum or Kaia address for which you want to find a name.
@@ -1120,7 +1116,7 @@ Imagine you have an ENS name or similar Kaia name like example.kaia and want to 
 2. Run the Command: Use cast resolve-name with the name, specifying the Kaia blockchain RPC URL if needed.
 Example Command:
 ```bash
-cast resolve-name --rpc-url <kaia_rpc_url> example.kaia
+cast resolve-name --rpc-url <https://public-en.node.kaia.io> example.kaia
 
 Where:
 example.kaia is the name you want to resolve.
@@ -1191,7 +1187,7 @@ Let’s say you’re working on the Kaia blockchain and you want to find out if 
 2. Run the Command: Use cast lookup-address with the target address to search for any associated names.
 Example Command:
 ```bash
-cast lookup-address --rpc-url <kaia_rpc_url> 0xAddress
+cast lookup-address --rpc-url <https://public-en.node.kaia.io> 0xAddress
 
 Where:
 0xAddress is the Ethereum or Kaia address for which you want to find a name.
@@ -1230,7 +1226,7 @@ Imagine you have an ENS name or similar Kaia name like example.kaia and want to 
 2. Run the Command: Use cast resolve-name with the name, specifying the Kaia blockchain RPC URL if needed.
 Example Command:
 ```bash
-cast resolve-name --rpc-url <kaia_rpc_url> example.kaia
+cast resolve-name --rpc-url <https://public-en.node.kaia.io> example.kaia
 
 Where:
 example.kaia is the name you want to resolve.
@@ -1647,7 +1643,7 @@ cast wallet new --network kaia
 ```
 Output:
 ```plaintext
-Private Key: 0x123456789abcdef...
+ACCOUNT <your-private-key>: 0x123456789abcdef...
 Address: 0xYourNewKaiaAddress
 ```
 This will create a new wallet for Kaia, giving you a private key and the corresponding Kaia address.
@@ -1710,12 +1706,12 @@ cast wallet new --network kaia
 ```
 Example Output:
 ```plaintext
-Private Key: 0x7a14bfcd4b6e5e9f6d46212e56c02bdbf9b3c7f7c4d10d7ef9d289f7deecfc01
+ACCOUNT: 0x7a14bfcd4b6e5e9f6d46212e56c02bdbf9b3c7f7c4d10d7ef9d289f7deecfc01
 Address: 0xCa1a53E5F4bA56fF91b2fBaAA1F827EcB8e7653a
 ```
 
 #### Explanation:
-1. Private Key: This is the private key for your newly created wallet. It is crucial to keep this private, as it allows you to sign transactions and prove ownership of the wallet.
+1. account: This is the private key for your newly created wallet. It is crucial to keep this private, as it allows you to sign transactions and prove ownership of the wallet.
 2. Address: This is the public address associated with your wallet. You can use this to receive tokens or interact with Kaia-based smart contracts.
 3. Backup: It’s essential to store both the private key and address securely because the private key is necessary to access and manage the wallet. If the private key is lost, the wallet cannot be recovered.
 4. Kaia Blockchain: This wallet will be specifically configured for transactions and interactions within the Kaia blockchain ecosystem.
@@ -1751,7 +1747,7 @@ Address: 0xCa1a53E5F4bA56fF91b2fBaAA1F827EcB8e7653a
 
 #### Explanation:
 1. Address: This is the public address of the wallet generated using the provided private key. You can use this address to interact with the Kaia blockchain, such as sending or receiving transactions, participating in Kaia-based decentralized applications (DApps), and more.
-2. Private Key Security: The private key is essential for generating the corresponding wallet address. Ensure that you store the private key securely, as anyone with access to the private key can control the wallet.
+2. account: The private key is essential for generating the corresponding wallet address. Ensure that you store the private key securely, as anyone with access to the private key can control the wallet.
 3. Kaia Blockchain Compatibility: The address generated will be compatible with Kaia, allowing for seamless interactions with Kaia's smart contracts and decentralized applications.
 
 #### Use Cases for cast wallet address:
@@ -1816,7 +1812,7 @@ Example Command:
 cast wallet verify --signed "0xf86c808504a817c800825208940xRecipientAddress880de0b6b3a7640000801ba0b90cfd712f746c011f7fffc9b74f5e35b7f9f8da3f92a6183a199ffea56f7d1da02c7a27f7fc50bc2e870f09d278b60e1788d345f8d4f949557f15db34c90bb76bfe76f"
 ```
 
-Example Output:
+Example Output
 ```plaintext
 Transaction is valid: True
 Signature matches the sender's address: 0xYourAddress
