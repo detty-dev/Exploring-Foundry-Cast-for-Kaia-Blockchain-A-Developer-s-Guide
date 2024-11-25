@@ -125,7 +125,7 @@ The `cast chain-id` command in Foundry Cast retrieves the unique chain ID for th
 
    **Result (Kaia example):**  
    ```bash
-   12345
+   8217
    ```
 
    This output (e.g., `8217`) indicates you’re connected to the Kaia Mainnet, where `8217` is the Kaia chain ID.
@@ -151,7 +151,7 @@ Before deploying a smart contract, you might want to ensure you're on the correc
 
 ```bash
 # Check if we're on Kaia Mainnet
-if [ "$(cast chain-id --rpc-url https://mainnet.kaia.io/rpc)" = "12345" ]; then
+if [ "$(cast chain-id --rpc-url https://public-en.node.kaia.io" = "8217" ]; then
     echo "Connected to Kaia Mainnet. Proceeding with deployment..."
     # Add your deployment command here
 else
@@ -185,7 +185,7 @@ The `cast chain` command in Foundry Cast returns the symbolic name of the blockc
 
    **Example:**  
    ```bash
-   cast chain --rpc-url https://testnet.kaia.io/rpc
+   cast chain --rpc-url https://public-en-kairos.node.kaia.io
    ```
 
    **Result (Kaia Testnet example):**  
@@ -262,7 +262,7 @@ To send Kaia's native token from one account to another, specify the recipient's
 **Example:**
 
 ```bash
-cast send --rpc-url https://public-en.node.kaia.io --account YOUR_PRIVATE_KEY --to 0xRecipientAddress --value 1000000000000000000  # 1 Kaia token in the smallest unit (wei)
+cast send --rpc-url https://public-en.node.kaia.io --account --to 0xRecipientAddress --value 1000000000000000000  # 1 Kaia token in the smallest unit (wei)
 ```
 
 - `--rpc-url`: The URL of the Kaia RPC endpoint (`https://public-en.node.kaia.io`).
@@ -284,7 +284,7 @@ If you want to send an ERC-20 token on the Kaia network, you will interact with 
 **Example:**
 
 ```bash
-cast send --rpc-url https://public-en.node.kaia.io --account YOUR_PRIVATE_KEY --to 0xTokenContractAddress --data "0xa9059cbb000000000000000000000000RecipientAddress0000000000000000000000000000000000"
+cast send --rpc-url https://public-en.node.kaia.io --account  --to 0xTokenContractAddress --data "0xa9059cbb000000000000000000000000RecipientAddress0000000000000000000000000000000000"
 ```
 
 **Explanation of parameters:**  
@@ -1651,21 +1651,21 @@ This will create a new wallet for Kaia, giving you a private key and the corresp
 2. Import an Existing Kaia Wallet Using a Private Key
 To import an existing Kaia wallet, use the following command, substituting 0xYourPrivateKey with the private key of your Kaia wallet:
 ```bash
-cast wallet import --account 0xYourKaiaPrivateKey --network kaia
+cast wallet import --account  --network kaia
 ```
 This will import the Kaia wallet and display the address.
 
 3. Sign a Transaction on Kaia
 To sign a transaction on Kaia, such as sending native Kaia tokens (or other tokens supported on Kaia), use:
 ```bash
-cast wallet sign --account 0xYourPrivateKey --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
+cast wallet sign --account  --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
 ```
 This signs a transaction to send 1 Kaia token (or the equivalent in native units, depending on the token's decimal) from your wallet to the recipient's address.
 
 4. Sign a Message on Kaia
 To sign a message (useful for authentication or identity verification), use:
 ```bash
-cast wallet sign-message --account 0xYourPrivateKey "Hello, Kaia Blockchain!" --network kaia
+cast wallet sign-message --account  "Hello, Kaia Blockchain!" --network kaia
 ```
 This signs the message "Hello, Kaia Blockchain!" using the private key of your Kaia wallet.
 
@@ -1679,7 +1679,7 @@ This will return the balance of the Kaia wallet at the specified address.
 6. Send Kaia Tokens Using the Wallet
 To send tokens (native Kaia tokens or other Kaia-based tokens) from your wallet to another address:
 ```bash
-cast wallet send --account 0xYourPrivateKey --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
+cast wallet send --account  --to 0xRecipientKaiaAddress --value 1000000000000000000 --gas 21000 --gas-price 1000000000 --network kaia
 ```
 This command sends 1 Kaia token (1,000,000,000,000,000,000 wei equivalent) from your wallet to the recipient's Kaia address.
 
@@ -1728,11 +1728,11 @@ blockchain in a secure and efficient manner.
 The cast wallet address command is used to retrieve the public address associated with a wallet, typically from a private key or a local wallet file. On Kaia blockchain, this command would provide the address for your Kaia wallet, which you can use to interact with the Kaia network (e.g., sending and receiving tokens, interacting with smart contracts).
 Command Syntax:
 ```bash
-cast wallet address --account <your-private-key> --network kaia
+cast wallet address --account --network kaia
 ```
 
 #### Description:
---`account` <your-private-key>: This flag specifies the private key for the wallet. The command uses the private key to generate the corresponding public address.
+--`account`: This flag specifies the private key for the wallet. The command uses the private key to generate the corresponding public address.
 --`network kaia`: This flag specifies that the wallet is for the Kaia blockchain, ensuring that the address is compatible with the Kaia network.
 
 Example Usage:
@@ -1763,7 +1763,7 @@ The cast wallet sign command in Foundry is used to sign a transaction locally us
 On  Kaia blockchain, this command would allow you to sign a transaction (e.g., sending tokens or interacting with smart contracts) before submitting it to the Kaia network.
 Command Syntax:
 ```bash
-cast wallet sign --account <your-private-key> --to <recipient-address> --value <amount> --gas <gas-limit> --gas-price <gas-price>
+cast wallet sign --account --to <recipient-address> --value <amount> --gas <gas-limit> --gas-price <gas-price>
 ```
 
 #### Parameters:
