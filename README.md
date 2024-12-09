@@ -136,7 +136,7 @@ The `cast chain-id` command in Foundry Cast retrieves the unique chain ID for th
    **Example command for verifying the chain ID on Kaia Testnet:**
 
    ```bash
-   cast chain-id --rpc-url https://public-en-kairos.node.kaia.io)
+   cast chain-id --rpc-url https://public-en-kairos.node.kaia.io
    ```
 
    **Result (Kaia Testnet example):**  
