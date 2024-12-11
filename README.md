@@ -161,57 +161,7 @@ fi
 
 ---
 
-### 2. `cast chain`
-The `cast chain` command in Foundry Cast returns the symbolic name of the blockchain network you're connected to, such as `mainnet`, `testnet`, or any specific Kaia network. This command is useful for verifying your network before performing any actions, like deploying smart contracts or sending transactions.
-
-#### Example: Using `cast chain` to Confirm the Network on Kaia
-
-1. **Run `cast chain` to Display the Current Network**  
-   To retrieve the symbolic name of the network (e.g., `Kaia Mainnet`), simply run:
-
-   ```bash
-   cast chain
-   ```
-
-   **Result (Kaia Mainnet example):**  
-   ```plaintext
-   kaia-mainnet
-   ```
-
-   This output (`kaia-mainnet`) indicates that you're connected to the Kaia Mainnet.
-
-2. **Using `--rpc-url` to Specify a Different Kaia Network**  
-   To check the network name for a specific Kaia RPC URL, such as a testnet, you can add the `--rpc-url` flag.
-
-   **Example:**  
-   ```bash
-   cast chain --rpc-url https://public-en-kairos.node.kaia.io
-   ```
-
-   **Result (Kaia Testnet example):**  
-   ```plaintext
-   kaia-testnet
-   ```
-
-#### Example: Checking Network Before Script Execution
-Before running deployment scripts or other actions, verifying the network is a good practice to prevent errors like accidental deployments to the wrong network.
-
-```bash
-# Set the expected network
-EXPECTED_NETWORK="kaia-mainnet"
-
-# Check the actual network using cast chain
-ACTUAL_NETWORK=$(cast chain --rpc-url https://public-en.node.kaia.io)
-
-if [ "$ACTUAL_NETWORK" = "$EXPECTED_NETWORK" ]; then
-    echo "Connected to $EXPECTED_NETWORK. Proceeding with deployment..."
-    # Add deployment commands here
-else
-    echo "Connected to $ACTUAL_NETWORK instead of $EXPECTED_NETWORK. Aborting deployment."
-fi
-```
-
-### 3. `cast client`
+### 2. `cast client`
 The `cast client` command in Foundry Cast retrieves the client version of the blockchain node you're connected to, such as the software and version of the node (e.g., Geth, Besu). This is useful for ensuring that the node you're interacting with supports the required features or is running an expected version.
 
 #### Example: Using `cast client` with Kaia RPC Endpoint
